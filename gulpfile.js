@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var ghPages = require('gulp-gh-pages');
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
@@ -119,7 +120,7 @@ gulp.task('wiredep', function () {
 
 gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
-    .pipe($.gh-pages.ghPages({
+    .pipe(ghPages({
       force: true
     }));
 });
