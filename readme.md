@@ -1,20 +1,6 @@
-# Getting Started
+# Unhackathon
 
-Welcome to the [gulp][gulp] flavor of our web app generator! If you're not familiar with gulp, we suggest checking out [their docs][gulp-docs].
-
-If you haven't already, install [yo][yo] and this generator by running:
-
-```sh
-$ npm install --global yo generator-gulp-webapp
-```
-
-Now you can scaffold your very own web app:
-
-```sh
-$ mkdir my-webapp
-$ cd my-webapp
-$ yo gulp-webapp
-```
+We will be using gulp to run most of our tasks. If you're not familiar with gulp, we suggest checking out [their docs][gulp-docs].
 
 To start developing, run:
 
@@ -29,6 +15,13 @@ To make a production-ready build of the app, run:
 ```sh
 $ gulp
 ```
+
+To make a deploy to gh-pages run:
+
+```sh
+$ gulp deploy
+```
+*Note: before deploying you must already have a production version of the app in the dist/ directory through eitehr the default gulp task or gulp build
 
 ## Tasks
 
