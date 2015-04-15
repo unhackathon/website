@@ -21,7 +21,7 @@ To make a deploy to gh-pages run:
 ```sh
 $ gulp deploy
 ```
-*Note: before deploying you must already have a production version of the app in the dist/ directory through eitehr the default gulp task or gulp build
+*Note: before deploying you must already have a production version of the app in the dist/ directory through either the default gulp task or gulp build
 
 ## Tasks
 
