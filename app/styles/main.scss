@@ -2,10 +2,12 @@
 // endbower
 //Colors
 $red: #cc0000;
-$grey: grey;
-$white: #f8f8f8;
+$grey: #999;
+$white: #FFFFFF;
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,700);
-@import url(http://fonts.googleapis.com/css?family=Oswald:700);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab);
 @font-face {
   font-family: 'ChunkFive';
   src: url('../fonts/ChunkFive.woff2') format('woff2'), url('../fonts/ChunkFive.woff') format('woff'), url('../fonts/ChunkFive.ttf') format('truetype');
@@ -17,21 +19,22 @@ $white: #f8f8f8;
 }
 
 body {
-  font-family: Roboto;
-  -webkit-font-smoothing: subpixel-antialiased; //goddamn safari
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased; //goddamn safari
 }
 
 header {
-  overflow: auto;
+  overflow: hidden;
   width: 100%;
   height: 100vh;
-  min-height: 650px;
-  background-image: url(/images/nyc.jpg);
-
+  background: url(/images/nyc.jpg) no-repeat center 0px fixed;
+  background-size: cover;
   #logo {
     background-color: $red;
-    background-size: 100px 100px;
     position: fixed;
+    letter-spacing: 0;
     right: 20px;
     bottom: 20px;
     color: $white;
@@ -47,25 +50,26 @@ header {
       text-transform: uppercase;
       margin-bottom: 12px;
     }
+    &:hover {
+      animation: spin .5s both ease-out;
+    }
   }
   .title {
     display: block;
     margin: auto;
-    width:66%;
     margin-top: 20%;
     padding: 30px 30px;
-    box-shadow: 0 3px 3px rgba(0,0,0,.3);
-    background-color: $white;
+    // box-shadow: 0 3px 3px rgba(0,0,0,.3);
+    // background-color: $white;
     opacity: 0.9;
     filter: alpha(opacity=90);
-    
     h1 {
       padding: 0;
       margin: 0;
       letter-spacing: 3px;
-      font-size: 3.5em;
-      // text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      color: $red;
+      font-size: 7vw;
+      color: $white;
+      text-shadow: $red 6px 2px;
       font-family: Roboto, sans-serif;
       font-weight: 900;
       text-transform: uppercase;
@@ -75,13 +79,101 @@ header {
       padding: 0;
       margin: 0;
       letter-spacing: 3px;
-      font-size: 2em;
-      //text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      color: $red;
-      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 4vh;
+      color: $white;
+      text-shadow: $red 4px 2px;
+      font-family: Roboto, sans-serif;
       font-weight: 900;
       text-transform: uppercase;
       text-align: center;
+    }
+  }
+}
+
+#about {
+  padding: 10% 0;
+
+  .about-text {
+    // max-width: 630px;
+
+    padding-left: 15px;
+    padding-right: 15px;
+    p {
+      font-size: 18px;
+      line-height: 2;
+      padding-bottom: 25px;
+      text-align: center;
+    }
+  }
+}
+
+#faq {
+  margin-bottom: 3%;
+  .faq-title {
+    margin: 4vh auto;
+    h2 {
+      font-weight: bold;
+      font-size: 2em;
+    }
+  }
+  h3 {
+    font-size: 1;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+footer {
+  text-align: center;
+  font-size: .9em;
+  margin-bottom: 5vh;
+  .social-links {
+    margin-top: 1em;
+    .social-item {
+      margin: 0 0.5em;
+      display: inline-block;
+      margin: 0 1em;
+      img {
+        height: 2em;
+        width: 2em;
+      }
+      .social-item-link {
+        color: black;
+      }
+      .social-item-link img {
+        width: 2em;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(360deg)scale(1.1);
+  }
+}
+
+@media screen and (min-width: 720px) {
+  footer .social-item {
+    margin: 0 1em;
+  }
+}
+
+@media screen and (max-width: 719px) {
+  header {
+    height: 700px;
+    .title {
+      h1 {
+        font-size: 40px;
+        text-shadow: $red 3px 3px;
+      }
+      h3 {
+        font-size: 20px;
+        text-shadow: $red 3px 1px;
+      }
     }
   }
 }
