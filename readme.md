@@ -16,7 +16,7 @@ To make a production-ready build of the app, run:
 $ gulp
 ```
 
-To make a deploy to gh-pages run:
+To deploy to gh-pages run:
 
 ```sh
 $ gulp deploy
