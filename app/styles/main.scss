@@ -1,51 +1,61 @@
 // bower:scss
 // endbower
 //Colors
-$red: #cc0000;
-$grey: #ededed;
+$red: #ff0000;
+$blue: #1485CC;
 $white: #FFFFFF;
-$text: #1b1e25;
-// @import url(http://fonts.googleapis.com/css?family=Roboto:300,700);
-// @import url(http://fonts.googleapis.com/css?family=Lato);
-// @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+$black: #1b1e25;
+$dark-grey: #3b403d;
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,700);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
 @font-face {
   font-family: 'ChunkFive';
   src: url('../fonts/ChunkFive.woff2') format('woff2'), url('../fonts/ChunkFive.woff') format('woff'), url('../fonts/ChunkFive.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('../fonts/HelveticaNeue.otf') format('opentype');
-}
 
-@mixin fullsize($url){
-  background: url($url) no-repeat center ;
+@mixin fullsize($url) {
+  background: url($url) no-repeat center;
   background-size: cover;
-  min-height: 100vh;
+  min-height: 600px;
   height: 100%;
+  margin: 0 10%;
+  box-shadow: 7px 7px rgba(0, 0, 0, .1);
+
 }
 
 body {
+  background-color: $blue;
+
   height: 100%;
-  color: $text;
-  font-family: 'Open Sans', sans-serif;
+  color: $black;
+  font-family: Roboto, sans-serif;
   letter-spacing: 1px;
-  font-size: 16px;
+  font-size: 18px;
   -webkit-font-smoothing: antialiased; //goddamn safari
 }
 
 .section {
-  padding-top: 5%;
-  padding-bottom: 5%;
+  margin: 10% 10%;
+  box-shadow: 7px 7px rgba(0, 0, 0, .1);
+  background-color: $white;
 }
-
+// .gradient-background {
+//   background: linear-gradient($grey, $dark-grey);
+// }
 .section-title {
-  h2 {
-    font-weight: bold;
-    font-size: 2em;
-    font-weight: 700;
-    margin: 30px auto;
-  }
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  color: $white;
+  text-shadow: 3px 3px 0 black;
+  background-color: $red;
+  font-weight: 900;
+  font-size: 35px;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.1;
 }
 
 #logo {
@@ -103,7 +113,7 @@ header {
       padding: 0;
       margin: 0;
       letter-spacing: 3px;
-      font-size: 4vh;
+      font-size: 2em;
       color: $white;
       text-shadow: $red 4px 2px;
       font-family: Roboto, sans-serif;
@@ -120,66 +130,50 @@ header {
 }
 
 #about {
-
-  .about-text {
-    // max-width: 630px;
-    // padding-left: 15px;
-    // padding-right: 15px;
+  
     p {
       font-size: 18px;
       line-height: 2;
       padding-bottom: 25px;
       text-align: center;
     }
-  }
-  // .unhackathon-pic {
+  
 
-  //   width: 100%;
-  //   height: 100%;
-
-  //   img {
-  //     max-width: 110%;
-  //     max-height: 110%;
-  //     border-radius: 100%;
-  //     border: 5px solid $grey;
-  //   }
-  // }
 }
 
 #unhackathon-pic {
   @include fullsize("/images/unhackathon.jpg");
-} 
+}
 
 #faq {
-  margin-bottom: 3%;
+  padding-bottom: 20px;
   h3 {
     font-size: 1;
     font-weight: bold;
     text-transform: uppercase;
   }
-  background-color: $grey;
+  background-color: $white;
 }
 
 footer {
+  color: $white;
+  background-color: $dark-grey;
   text-align: center;
-  font-size: .9em;
-  margin-bottom: 5vh;
-  .social-links {
-    margin-top: 1em;
-    .social-item {
-      margin: 0 0.5em;
-      display: inline-block;
-      margin: 0 1em;
-      img {
-        height: 2em;
-        width: 2em;
-      }
-      .social-item-link {
-        color: black;
-      }
-      .social-item-link img {
-        width: 2em;
-      }
+  padding-top: 30px;
+  .social {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    line-height: 40px;
+    font-family: Entypo;
+    text-align: center;
+    border-radius: 50%;
+    background: #fff;
+    overflow: hidden;
+
+    a {
+      color: $dark-grey;
     }
   }
 }
@@ -218,7 +212,6 @@ footer {
     float: left;
     position: relative;
   }
-
   #about {
     .unhackathon-pic img {
       height: 90%;
@@ -226,3 +219,5 @@ footer {
     }
   }
 }
+
+
