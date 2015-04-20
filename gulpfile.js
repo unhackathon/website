@@ -121,7 +121,11 @@ gulp.task('wiredep', function () {
 gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages({
+<<<<<<< HEAD
       branch: 'master',
+=======
+      branch: "master"
+>>>>>>> d74589ba74ddd1b59e5fbfea111f4e58eee36a5b
       force: true
     }));
 });
