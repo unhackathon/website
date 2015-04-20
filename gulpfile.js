@@ -121,6 +121,7 @@ gulp.task('wiredep', function () {
 gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages({
+      branch: "master"
       force: true
     }));
 });
