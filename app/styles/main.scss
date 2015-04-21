@@ -5,6 +5,7 @@ $red: #ff0000;
 $blue: #1485CC;
 $white: #FFFFFF;
 $black: #1b1e25;
+$grey: #dedede;
 $dark-grey: #3b403d;
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,700,900);
 @import url(http://weloveiconfonts.com/api/?family=entypo);
@@ -39,14 +40,14 @@ body {
 }
 
 // .gradient-background {
-//   background: linear-gradient($grey, $dark-grey);
+//   background: linear-gradient($blue, darken($blue, 10%));
 // }
 .section-title {
   margin-left: 20px;
   margin-right: 20px;
   padding: 20px;
   color: $white;
-  text-shadow: 3px 3px 0 black;
+  text-shadow: 3px 3px 0 $black;
   background-color: $red;
   font-weight: 900;
   text-transform: uppercase;
