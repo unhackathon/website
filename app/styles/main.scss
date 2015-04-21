@@ -13,7 +13,6 @@ $dark-grey: #3b403d;
   src: url('../fonts/ChunkFive.woff2') format('woff2'), url('../fonts/ChunkFive.woff') format('woff'), url('../fonts/ChunkFive.ttf') format('truetype');
 }
 
-
 @mixin fullsize($url) {
   background: url($url) no-repeat center;
   background-size: cover;
@@ -21,12 +20,10 @@ $dark-grey: #3b403d;
   height: 100%;
   margin: 0 10%;
   box-shadow: 7px 7px rgba(0, 0, 0, .1);
-
 }
 
 body {
   background-color: $blue;
-
   height: 100%;
   color: $black;
   font-family: Roboto, sans-serif;
@@ -40,6 +37,7 @@ body {
   box-shadow: 7px 7px rgba(0, 0, 0, .1);
   background-color: $white;
 }
+
 // .gradient-background {
 //   background: linear-gradient($grey, $dark-grey);
 // }
@@ -79,6 +77,10 @@ body {
   }
   &:hover {
     animation: spin .1s both ease-out;
+  }
+  #logo-place,
+  #logo-date {
+    font-weight: 700;
   }
 }
 
@@ -130,15 +132,12 @@ header {
 }
 
 #about {
-  
-    p {
-      font-size: 18px;
-      line-height: 2;
-      padding-bottom: 25px;
-      text-align: center;
-    }
-  
-
+  p {
+    font-size: 18px;
+    line-height: 2;
+    padding-bottom: 25px;
+    text-align: center;
+  }
 }
 
 #unhackathon-pic {
@@ -160,20 +159,52 @@ footer {
   background-color: $dark-grey;
   text-align: center;
   padding-top: 30px;
-  .social {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin: 0 10px;
-    line-height: 40px;
-    font-family: Entypo;
-    text-align: center;
-    border-radius: 50%;
-    background: #fff;
-    overflow: hidden;
-
-    a {
-      color: $dark-grey;
+  font-size: 16px;
+  .social-ul {
+    margin:auto;
+    padding: 0;
+    .social {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin: 0 10px;
+      line-height: 40px;
+      font-family: Entypo;
+      text-align: center;
+      border-radius: 50%;
+      background: #fff;
+      overflow: hidden;
+      transition: background-color .3s ease-out;
+      a {
+        color: $dark-grey;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+    }
+    .email:hover {
+      background-color: $black;
+      a {
+        color: $white;
+      }
+    }
+    .twitter:hover {
+      background-color: #55acee;
+      a {
+        color: $white;
+      }
+    }
+    .facebook:hover {
+      background-color: #3b5998;
+      a {
+        color: $white;
+      }
+    }
+    .github:hover {
+      background-color: #999999;
+      a {
+        color: $white;
+      }
     }
   }
 }
@@ -187,13 +218,7 @@ footer {
   }
 }
 
-@media screen and (min-width: 720px) {
-  footer .social-item {
-    margin: 0 1em;
-  }
-}
-
-@media screen and (max-width: 719px) {
+@media screen and (max-width: 768px) {
   header {
     height: 600px;
     padding: 48px 0 55px 0;
@@ -208,10 +233,6 @@ footer {
       }
     }
   }
-  #logo {
-    float: left;
-    position: relative;
-  }
   #about {
     .unhackathon-pic img {
       height: 90%;
@@ -219,5 +240,3 @@ footer {
     }
   }
 }
-
-
