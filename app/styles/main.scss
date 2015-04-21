@@ -6,7 +6,7 @@ $blue: #1485CC;
 $white: #FFFFFF;
 $black: #1b1e25;
 $dark-grey: #3b403d;
-@import url(http://fonts.googleapis.com/css?family=Roboto:300,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,700,900);
 @import url(http://weloveiconfonts.com/api/?family=entypo);
 @font-face {
   font-family: 'ChunkFive';
@@ -49,7 +49,6 @@ body {
   text-shadow: 3px 3px 0 black;
   background-color: $red;
   font-weight: 900;
-  font-size: 35px;
   text-transform: uppercase;
   text-align: center;
   vertical-align: middle;
