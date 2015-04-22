@@ -6,9 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Favicon -->
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="/bower_components/normalize.css/normalize.css">
@@ -29,23 +28,23 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Unhackathon 2015" />
   <meta property="og:description" content="A New Kind of Hackathon in New York City, NY" />
-  <meta property="og:image" content="/images/unhackathon-logo.png" />
+  <meta property="og:image" content="http://unhackathon.org/images/fav.png" />
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Unhackathon 2015">
+  <meta name="twitter:url" content="http://unhackathon.org">
   <meta name="twitter:description" content="A New Kind of Hackathon in New York City, NY">
-  <meta name="twitter:creator" content="@unhackathon">
-  <!--   <meta name="twitter:image:src" content="#"> TODO: Twitter Image-->
-  <meta name="twitter:domain" content="unhackathon.org">
+  <meta name="twitter:image:src" content="http://unhackathon.org/images/fav.png">
   <meta name="twitter:site" content="@unhackathon">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
 <body>
-  <!--[if lt IE 10]>
+  <div class="page-container">
+    <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-  <header id="top">
-      <div id="logo" >
+    <header id="top">
+      <div id="logo" class="hidden-xs">
         <div id="logo-name">
           Un
           <br>hack
@@ -58,100 +57,104 @@
           New York City
         </div>
       </div>
-    <div class="title">
-      <h1>A New Kind of Hackathon</h1>
-      <h3>New York City, NY</h3>
-    </div>
-  </header>
-
-  <section id="about" class="section container-fluid">
-    <div class="row text-center ">
-      <h2 class="section-title">What is Unhackathon?</h2>
-      <br>
-    </div>
-    <p>Unhackathon is the place for learning and experimenting. Whether you want to learn learn to code, experiment with a new programming language, or check out a new API, we will make sure there is an abundance of resources and mentorship to help you along the way. Most importantly, we want to make sure everyone is going home with something they're proud of.
-    </p>
-  </section>
-  <!--   <section id="unhackathon-pic" class="fullsize"></section> -->
-  
-  <section id="faq" class="section container-fluid">
-    <div class="row text-center ">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-    </div>
-    <div class="row">
-      <div class="col-sm-5 col-sm-offset-1">
-        <h3>What is a hackathon?</h3>
-        <p>A hackathon is an event where programmers, designers, and people of all kinds come together to build amazing projects within a single weekend.</p>
+      <div class="title">
+        <h1>A New Kind of Hackathon</h1>
+        <h3>New York City, NY</h3>
       </div>
-      <div class="col-sm-5">
-        <h3>Who can attend?</h3>
-        <p>Unhackathon is open to any student who wants to spend a weekend building something great! Whether this is your first hackathon or your 15th, you’ll have opportunities to learn from our hackers and mentors, compete for awards, and have an epic time.</p>
+    </header>
+    <section id="about" class="section container-fluid">
+      <div class="row text-center ">
+        <h2 class="section-title">What is Unhackathon?</h2>
+        <br>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-5 col-sm-offset-1">
-        <h3>How big are teams?</h3>
-        <p>Teams of up to 5 ok, pair programming ok, working by yourself also ok (springboard projects great for this - you’ll be able to work alongside other people doing the same stuff) - we will help you find a team if you want one.</p>
+      <p>Unhackathon is the place for learning and experimenting. Whether you want to learn learn to code, experiment with a new programming language, or check out a new API, we will make sure there is an abundance of resources and mentorship to help you along the way. Most importantly, we want to make sure everyone is going home with something they're proud of.
+      </p>
+    </section>
+    <section class="section" id="photos">
+      <img src="images/pic1.jpg" alt="Unhackathon">
+      <img src="images/pic2.jpg" alt="Unhackathon">
+      <img src="images/pic3.jpg" alt="Unhackathon">
+      <img src="images/pic4.jpg" alt="Unhackathon">
+    </section>
+      <!-- <section id="unhackathon-pic" class="fullsize"></section> -->
+    <section id="faq" class="section container-fluid">
+      <div class="row text-center ">
+        <h2 class="section-title">Frequently Asked Questions</h2>
       </div>
-      <div class="col-sm-5">
-        <h3>What experience do I need?</h3>
-        <p>One of the things about Unhackathon is that it’s a great place jump right into something completely new. Designers, game programmers, web developers and hardware hackers are all more than welcome. Use this opportunity to get outside your comfort zone and learn something new.</p>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <h3>What is a hackathon?</h3>
+          <p>A hackathon is an event where programmers, designers, and people of all kinds come together to build amazing projects within a single weekend.</p>
+        </div>
+        <div class="col-sm-5">
+          <h3>Who can attend?</h3>
+          <p>Unhackathon is open to any student who wants to spend a weekend building something great! Whether this is your first hackathon or your 15th, you’ll have opportunities to learn from our hackers and mentors, compete for awards, and have an epic time.</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-5 col-sm-offset-1">
-        <h3>What does attending cost?</h3>
-        <p>It’s free! We obviously don’t have exact numbers, but we can say the event itself is free and that we intend to reimburse travel if we can.</p>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <h3>How big are teams?</h3>
+          <p>Teams of up to 5 ok, pair programming ok, working by yourself also ok (springboard projects great for this - you’ll be able to work alongside other people doing the same stuff) - we will help you find a team if you want one.</p>
+        </div>
+        <div class="col-sm-5">
+          <h3>What experience do I need?</h3>
+          <p>One of the things about Unhackathon is that it’s a great place jump right into something completely new. Designers, game programmers, web developers and hardware hackers are all more than welcome. Use this opportunity to get outside your comfort zone and learn something new.</p>
+        </div>
       </div>
-      <div class="col-sm-5">
-        <h3>What should I bring with me?</h3>
-        <p>Your brain, and your heart! And anything else that you need to be your most productive. Laptop, peripherals, sweatshirt, change of clothes, and a pillow and sleeping bag if you plan on napping. We’re working on getting some hardware to hack on, but you should plan on bringing anything you definitely need.</p>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <h3>What does attending cost?</h3>
+          <p>It’s free! We obviously don’t have exact numbers, but we can say the event itself is free and that we intend to reimburse travel if we can.</p>
+        </div>
+        <div class="col-sm-5">
+          <h3>What should I bring with me?</h3>
+          <p>Your brain, and your heart! And anything else that you need to be your most productive. Laptop, peripherals, sweatshirt, change of clothes, and a pillow and sleeping bag if you plan on napping. We’re working on getting some hardware to hack on, but you should plan on bringing anything you definitely need.</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-5 col-sm-offset-1">
-        <h3>What is the environment like?</h3>
-        <p>Good food, friends, personal attention, health. view of the city, natural light, community, varied spaces.</p>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <h3>What is the environment like?</h3>
+          <p>Good food, friends, personal attention, health. view of the city, natural light, community, varied spaces.</p>
+        </div>
+        <div class="col-sm-5">
+          <h3>What kinds of projects can I work on?</h3>
+          <p>What you'll build is up to you. We will have resources to help you get started and mentors to help you if you can't think of anything to build.</p>
+        </div>
       </div>
-      <div class="col-sm-5">
-        <h3>What kinds of projects can I work on?</h3>
-        <p>What you'll build is up to you. We will have resources to help you get started and mentors to help you if you can't think of anything to build.</p>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <h3>How can I sponsor?</h3>
+          <p>Shoot us an email at <a href="mailto:sponsorship@unhackathon.org">sponsorship@unhackathon.org</a> and we'll get back to you as soon as possible.</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-5 col-sm-offset-1">
-        <h3>How can I sponsor?</h3>
-        <p>Shoot us an email at <a href="mailto:sponsorship@unhackathon.org">sponsorship@unhackathon.org</a> and we'll get back to you as soon as possible.</p>
-      </div>
-    </div>
-  </section>
-  <!-- <div class="gradient-background"> -->
-  <section id="sponsors" class="section container-fluid">
+    </section>
+    <!-- <div class="gradient-background"> -->
+    <!--   <section id="sponsors" class="section container-fluid">
     <div class="row text-center ">
       <h2 class="section-title">Previous Sponsors</h2>
       <br>
     </div>
     
-  </section>
-  <!-- </div> -->
-
-  <footer class="container-fluid">
-    <div class="row">
-      <div class="col-sm-3 col-sm-offset-2">
-        <p class="copy">&copy; 2015 Unhackathon</p>
-        <p>Made with <span style="color: #ff69b4;">♥</span> in NYC.</p>
+  </section> -->
+    <!-- </div> -->
+    <footer class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-sm-offset-2">
+          <p class="copy">&copy; 2015 Unhackathon</p>
+          <p>Made with <span style="color: #ff69b4;">♥</span> in NYC</p>
+        </div>
+        <div class="col-sm-4">
+          <ul class="social-ul">
+            <li class="social email"><a href="mailto:team@unhackathon.org">&#9993;</a></li>
+            <li class="social twitter"><a href="http://twitter.com/unhackathon" target="_blank">&#62217;</a></li>
+            <li class="social facebook"><a href="http://facebook.com/unhackathon" target="_blank">&#62220;</a></li>
+            <li class="social github"><a href="http://github.com/unhackathon" target="_blank">&#62208;</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="col-sm-4">
-        <ul class="social-ul">
-          <li class="social email" ><a href="mailto:team@unhackathon.org">&#9993;</a></li>
-          <li class="social twitter"><a href="http://twitter.com/unhackathon" target="_blank">&#62217;</a></li>
-          <li class="social facebook"><a href="http://facebook.com/unhackathon" target="_blank">&#62220;</a></li>
-          <li class="social github"><a href="http://github.com/unhackathon" target="_blank">&#62208;</a></li>
-        </ul>
-      </div>
-    </div>
-    <br>
-  </footer>
+      <br>
+    </footer>
+  </div>
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>
   (function(b, o, i, l, e, r) {
