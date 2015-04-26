@@ -3,9 +3,9 @@
 //Colors
 $red: #d00000;
 $blue: #1485CC;
-$white: #F5F5F5;
+$white: #FFF;
 $black: #1b1e25;
-$grey: #d2d2d5;
+$grey: #edecec;
 $dark-grey: #3b403d;
 $sky-blue: #11ccff;
 $sky-blue-dark: #00bbff;
@@ -21,9 +21,9 @@ $sky-blue-dark: #00bbff;
   background-size: cover;
   min-height: 600px;
   height: 100%;
-  margin: 0 10%;
-  border: 20px solid $white;
-  box-shadow: 7px 7px rgba(0, 0, 0, .1);
+  // margin: 0 10%;
+  // border: 20px solid $white;
+  // box-shadow: 7px 7px rgba(0, 0, 0, .1);
 }
 
 body {
@@ -40,6 +40,7 @@ body {
   padding: 1px 0;
   background: linear-gradient(to bottom, $sky-blue, $sky-blue-dark);
 }
+
 .section {
   margin: 10% 10%;
   box-shadow: 7px 7px rgba(0, 0, 0, .1);
@@ -147,8 +148,8 @@ header {
   }
 }
 
-#unhackathon-pic {
-  @include fullsize("/images/pic4.jpg");
+#city-pic {
+  @include fullsize("/images/city.png");
 }
 
 #faq {

@@ -1,6 +1,18 @@
 # Unhackathon
 
-We will be using gulp to run most of our tasks. If you're not familiar with gulp, we suggest checking out [their docs][gulp-docs].
+We will be using gulp to run most of our tasks. If you're not familiar with gulp, we suggest checking out [their docs][gulp-docs]. We will also be using [Bower][bower] for managing front-end packages so make sure you have both installed.
+
+To build the project, you must have Gulp and Bower installed. To build run:
+
+```sh
+$ npm install 
+```
+
+followed by:
+
+```sh
+$ bower install 
+```
 
 To start developing, run:
 
@@ -98,3 +110,4 @@ If there's a problem, it's usually with the `main` field, which wiredep uses to 
 [wiredep]:    https://github.com/taptapship/wiredep
 [replace]:    https://github.com/lazd/gulp-replace
 [override]:   https://github.com/taptapship/wiredep#bower-overrides
+[bower]:   	  http://bower.io/
