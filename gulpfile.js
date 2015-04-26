@@ -72,6 +72,7 @@ gulp.task('fonts', function () {
 gulp.task('extras', function () {
   return gulp.src([
     'app/*.*',
+    'app/CNAME',
     '!app/*.html'
   ], {
     dot: true
@@ -126,6 +127,7 @@ gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages({
       branch: 'master',
+      remoteUrl: 'git@github.com:unhackathon/unhackathon.github.io.git',
       force: true
     }));
 });
