@@ -1,0 +1,38 @@
+/**
+ * Site header
+ */
+.site-header {
+    border-top: 5px solid $grey-color-dark;
+    min-height: 56px;
+
+    // Positioning context for the mobile navigation icon
+    position: relative;
+}
+
+.section-heading {
+    font-family: unhackathon-font;
+    font-size:40px;
+}
+
+section {
+    margin:2em;
+}
+
+#top-hack {
+    width: 100vw;
+    height: 80vh;
+    >#top-hack-mask {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 80vh;
+    }
+}
+
+.content p {
+    font-size: 16px;
+    margin: 1em 0;
+}
