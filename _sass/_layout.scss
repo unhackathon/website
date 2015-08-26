@@ -15,15 +15,24 @@
 }
 
 h1.section-heading {
-    font-size: 34px;
+    font-size: 20px;
+    @media #{$large-screen} {
+        font-size: 34px;
+    }
 }
 
 h2.section-heading {
-    font-size: 24px;    
+    font-size: 16px;
+    @media #{$large-screen} {
+        font-size: 24px;
+    }    
 }
 
 section {
-    margin:2em;
+    margin:0;
+    @media #{$large-screen} {
+        margin: 2em;
+    }
 }
 
 #top-hack {
@@ -132,15 +141,22 @@ a:visited {
 }
 
 #softheon-logo {
-    background-image: url('/partner-logos/softheon.png');
-    //1118x187
-    width: 373px;
-    height: 62px;
     display: block;
-    background-size: 373px 62px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
     margin-bottom: 40px;
+    width: 90vw;
+    @media #{$large-screen} {
+        width: 373px;
+    }
+    img {
+        width: 90vw;
+        @media #{$large-screen} {
+            width: 373px;
+            height: 62px;
+        }
+    }
+    
 }
 
