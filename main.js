@@ -70,9 +70,9 @@ var pics = [
 function setImage(index) {
     var item = pics[index];
     document.getElementById("svg-image").setAttribute("xlink:href", "/img/" + item.img);
-    var applyElement = document.getElementById("apply-span");
-    if (applyElement) {
-        applyElement.style.color = item.color;
-    }
+    var applyElements = document.querySelectorAll(".apply-span");
+    for (var i = 0; i < applyElements.length; i++) {
+        applyElements[i].style.color = item.color;
+    };
 }
 setImage(Math.floor(Math.random() * pics.length));
