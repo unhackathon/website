@@ -48,10 +48,13 @@ section {
         left: 0;
         right: 0;
         top: 0;
-        bottom: 0;
         width: 100vw;
-        height: 100vh;
+        height: 80vh;
     }
+}
+
+.content.under-mask {
+    margin-top: -130px;
 }
 
 #top-hack-svg-container {
@@ -122,7 +125,6 @@ p .apply-span {
 
 #scroll-arrow {
     text-align: center;
-    margin-top: -40px;
     color: #333;
 }
 
