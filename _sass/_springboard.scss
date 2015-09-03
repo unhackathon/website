@@ -1,0 +1,53 @@
+$springboard-width: 600px;
+.springboard {
+    * {
+        box-sizing: border-box;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        font-family: unhackathon-font;
+    }
+
+    .springboard-content {
+        h1,h2,h3,h4,h5,h6 {
+            max-width: $springboard-width;
+            margin: 1em auto .25em auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        >p,>ul,>pre,>div {
+            max-width: $springboard-width;
+            margin-left: auto;
+            margin-right:auto;
+            &.wide {
+                max-width:800px;
+            }
+        }
+        .highlight {
+            background: #fffdd0;
+            padding: 1em;
+            font-size: 12px;
+            font-family: monospace;
+        }
+        >pre {
+            padding-left: 1.5em;
+        }
+        ul {
+            padding-left: 1.5em;
+            >li>ul {
+                padding-left: 1em;
+            }
+        }
+        margin-left: auto;
+        margin-right: auto;
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: $springboard-width;
+            &.short {
+                max-height: 400px;
+            }
+        }
+    }
+}
