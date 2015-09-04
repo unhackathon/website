@@ -41,11 +41,9 @@ $springboard-width: 600px;
                 padding-left: 1em;
             }
         }
-
         ol {
             padding-left: 1.5em;
         }
-
         .tag-label {
             display: inline;
             border: 1px solid #ff485d;
@@ -54,6 +52,14 @@ $springboard-width: 600px;
             white-space: nowrap;
             border-radius: .25em;
         }
+        div.column-1, div.column-2 {
+            float: left;
+            margin: 40px;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+    
         margin-left: auto;
         margin-right: auto;
 
