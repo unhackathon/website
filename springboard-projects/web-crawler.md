@@ -14,13 +14,13 @@ If you're feeling adventurous or dislike Python, you may decide to implement you
 
 ### Assumptions
 
-This tutorial assumes that you have Python 3 installed on your machine. If you do not have Python installed (or you have an earlier version installed) you can find the latest Python builds at https://www.python.org/downloads/. Make sure you have the correct version in your environment variables.
+This tutorial assumes that you have Python 3 installed on your machine. If you do not have Python installed (or you have an earlier version installed) you can find the latest Python builds at [https://www.python.org/downloads/](https://wwww.python.org/downloads/). Make sure you have the correct version in your environment variables.
 
 We will use pip to install packages. Make sure you have that installed as well. Sometimes this is installed as pip3 to differentiate between versions of pip built with Python 2 or Python 3; if this is the case, be mindful to use the pip3 command instead of pip while following along in the tutorial.
 
 We also assume that you’ll be working from the command line. You may use an IDE if you choose, but some aspects of this guide will not apply.
 
-This guide assumes only basic programming ability and knowledge of data structures and Python. If you’re more advanced, feel free to use it as a reference rather than a step by step tutorial. If you haven’t used Python and can’t follow along, check out the official Python tutorial at https://docs.python.org/3/tutorial/ and/or Codecademy’s Python class at https://www.codecademy.com/tracks/python.
+This guide assumes only basic programming ability and knowledge of data structures and Python. If you’re more advanced, feel free to use it as a reference rather than a step by step tutorial. If you haven’t used Python and can’t follow along, check out the official Python tutorial at [https://docs.python.org/3/tutorial/](https://docs.python.org/3/tutorial/) and/or Codecademy’s Python class at [https://www.codecademy.com/tracks/python](https://www.codecademy.com/tracks/python).
 
 ### Setting up your project
 
@@ -44,7 +44,8 @@ You’ve just made a directory to hold your project, set up a virtual environmen
 ### Web crawler overview
 
 Web crawlers are pretty simple. Starting from a certain URL (or a list of URLs), they will check the HTML at that URL for links (and other information) and then follow those links to repeat the process. A web crawler is the basis of many popular tools such as search engines (though search engines such as Google have much harder problems such as “How do we index this information so that it is searchable?”).
-Making our first HTTP request
+
+### Making our first HTTP request
 
 Before we can continue, we need to know how to make an HTTP request using the Requests library and, also, how to manipulate the data we receive from the response to that request.
 
@@ -170,28 +171,28 @@ for result in crawl_web_generator:
     print(result)
 {% endhighlight %}
 
-Generators were introduced with PEP 255 (https://www.python.org/dev/peps/pep-0255/). You can find more about them by Googling for ‘python generators’ or ‘python yield’.
+Generators were introduced with PEP 255 ([https://www.python.org/dev/peps/pep-0255/](https://www.python.org/dev/peps/pep-0255)). You can find more about them by Googling for ‘python generators’ or ‘python yield’.
 
 Perhaps you should combine the approach of using generators with another approach. Also, can you think of any other methods that may be of use?
 
 ### Robots.txt
 
-Robots.txt is a standard for asking “robots” (web crawlers and similar tools) not to crawl certain sites or pages. While it’s easy to ignore these requests, it’s generally a nice thing to account for. Robots.txt files are found in the root directory of a site, so before you crawl `example.com/`` it’s a simple matter to check `example.com/robots.txt` for any exclusions. To keep things simple you are looking for the following directives:
+Robots.txt is a standard for asking “robots” (web crawlers and similar tools) not to crawl certain sites or pages. While it’s easy to ignore these requests, it’s generally a nice thing to account for. Robots.txt files are found in the root directory of a site, so before you crawl `example.com/` it’s a simple matter to check `example.com/robots.txt` for any exclusions. To keep things simple you are looking for the following directives:
 
 ```
 User-agent: *
 Disallow: /
 ```
 
-Pages may also allow/disallow certain pages instead of all pages. Check out https://en.wikipedia.org/robots.txt for an example.
+Pages may also allow/disallow certain pages instead of all pages. Check out [https://en.wikipedia.org/robots.txt](https://en.wikipedia.org/robots.txt) for an example.
 
 ### Further Exercises
 
 1. Modify your program to follow `robots.txt` rules if found.
-Right now, our regular expression will not capture links that are more complicated than `<a href=”http://example.com”>` or `<a href=”/faq/”>`. For example, ``<a class=”fancy-link” href=”http://example.com”>` will fail because we do not allow for anything but a space between `a` and `href`. Modify the regular expression to make sure we’re following all the links. Check out https://regex101.com/ if you’re having trouble.
+Right now, our regular expression will not capture links that are more complicated than `<a href=”http://example.com”>` or `<a href=”/faq/”>`. For example, ``<a class=”fancy-link” href=”http://example.com”>` will fail because we do not allow for anything but a space between `a` and `href`. Modify the regular expression to make sure we’re following all the links. Check out [https://regex101.com/](https://regex101.com/) if you’re having trouble.
 2. Our program involves a graph traversal. Right now our algorithm resembles bread-first search. What simple change can we make to get depth-first search?
 3. In addition to each page’s URL, also print its title and the number of child links, in CSV format.
-4. Instead of CSV format, print results in JSON. Can you print a single JSON document while using generators? You can validate your JSON at http://pro.jsonlint.com/.
+4. Instead of CSV format, print results in JSON. Can you print a single JSON document while using generators? You can validate your JSON at [http://pro.jsonlint.com/](http://pro.jsonlint.com/).
 5. There are some bugs in our code above. Can you find them and fix them?
 
 ### Conclusion
