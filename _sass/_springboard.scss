@@ -17,7 +17,8 @@ $springboard-width: 600px;
         >p,>ul,>pre,>div,>ol {
             max-width: $springboard-width;
             margin-left: auto;
-            margin-right:auto;
+            margin-right: auto;
+            margin-bottom: 1em;
             &.wide {
                 max-width:800px;
             }
