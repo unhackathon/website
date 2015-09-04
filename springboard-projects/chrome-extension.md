@@ -9,7 +9,7 @@ Not everyone is satisfied with functionality in browsers nowadays. In order to
 acquire that functionality, people often turn to browser extensions that
 functionality in order to accomplish the tasks needed.
 
-Browser extensions aren’t a new things - they’ve existed since the late 90s with
+Browser extensions aren’t new things - they’ve existed since the late 90s with
 Mozilla, and have gradually expanded to include all modern browsers today. But
 they used to be undocumented pieces of voodoo - connecting intricately to
 internals of a web browser that were more often than not constantly changing.
@@ -17,17 +17,16 @@ Nowadays, they are fully documented and often require little more than basic
 knowledge of HTML and Javascript (even Firefox!).
 
 This guide will set you up with a basic Chrome extension that mimics the
-functionality of the infamous “Cloud-To-Butt” plugin. In essence, this extension
+functionality of the infamous _Cloud-To-Butt_ plugin. In essence, this extension
 sits in the background, and whenever it encounters a certain word, it replaces
 it with another. We’ll take you through the steps to set up the extension
 directory, create the javascript needed to replace “cloud” with “butt”, and then
 challenge you later to extend it later with an options menu to enable and
 disable the extension.
 
-For reference, you should keep a browser open to the Chrome Developer Centre at
-https://developer.chrome.com/extensions. You can also find links to all
-referenced material in this guide (and the field guide helper) at
-http://www.unhackathon.org/fieldguide.
+For reference, you should keep a browser open to the
+[Chrome Developer Centre](https://developer.chrome.com/extensions).
+It's a good reference to go to should you have any questions on what does what.
 
 **Challenge**: Try this on Firefox! Firefox also offers a powerful extension
 system, which not only supports HTML and Javascript, but also the core parts of
@@ -38,9 +37,10 @@ Chrome extension API.
 The best place to start is to actually create the extension itself so we can
 work with it. There are a lot of good boilerplate generators, or you can create
 one yourself by following the directions in Chrome’s documentation. The one this
-guide is going to use is Extensionizr, a boilerplate generator.
+guide is going to use is [Extensionizr](http://extensionizr.com),
+a boilerplate generator.
 
-Start by opening your browser and navigating to http://extensionizr.com. This
+Start by opening your browser and navigating to `extensionizr.com`. This
 site provides a lot of controls, and we won’t go through it in too much detail,
 but most options have a help menu attached to them so you can read about it
 further.
@@ -53,20 +53,20 @@ For our extension, select the following:
 * Override: No Override
 * Content scripts: Inject js
 * Misc addons: Select none.
-* URL permissions: “*://*/\*” (we want all permissions)
+* URL permissions: `*://*/\*` (we want all permissions)
 * Permissions: Shouldn’t need any, so deselect “Bookmarks” and anything checked.
 
-Now download and extract the generated ZIP file. If you are having trouble, you
-can download a pre-made extension ZIP from the field guide helper. If Chrome
-says that it is a dangerous ZIP and you don't trust the website we've given you,
-you can use the pre-made extension ZIP - we promise it’s safe!
+Now download and extract the generated ZIP file. Chrome seems to think that it's
+a dangerous ZIP sometimes, but it's not - we promise! If you're having trouble
+downloading the ZIP, you can use our pre-made one
+[here](/springboard-projects/chrome-extension/extension.zip).
 
 Let’s see our pre-made extension skeleton! To do so, click options, then
-“More tools” and “Extensions”. Enable “Developer mode” at the top of the
+`More tools` and `Extensions`. Enable `Developer mode` at the top of the
 extensions page if you haven’t done so already, then click
-“Load unpacked extension”. Navigate to the “ext” directory you unpacked earlier
+`Load unpacked extension`. Navigate to the `ext` directory you unpacked earlier
 and select it. This should load a new extension,
-“CHANGE THIS : Extension boilerplate”. Congrats! You now have a working
+__CHANGE THIS : Extension boilerplate__. Congrats! You now have a working
 extension. But it doesn’t do anything yet!
 
 ## Changing "cloud" to "butt"
@@ -79,7 +79,7 @@ extracted from the ZIP file.
 
 First off, you’ll notice that if you navigate to Google and
 open the console, you’ll see the words
-“Hello. This message was sent from scripts/inject.js” when it finishes loading.
+`Hello. This message was sent from scripts/inject.js` when it finishes loading.
 This exists in “scripts/inject.js”, and proves to us that Chrome is injecting
 this javascript into every webpage we visit. Neat, huh? (We'll add other
 websites next.)
@@ -92,11 +92,11 @@ links, alignment, images, etc - “elements” of the page.
 Since our extension is going to replace “cloud” with “butt” in all the text on
 the page, we should act accordingly:
 
-**So what's the goal?** The goal of our plugin is to visit all the nodes of the
-document, and when we encounter a text node, replace all occurrences of "cloud"
-with "butt".
+**So what's the goal of this extension?** The goal of our plugin is to visit all
+the nodes of the document, and when we encounter a text node, replace all
+occurrences of "cloud" with "butt".
 
-So let’s do it!
+### So let’s do it!
 
 **Challenge**: Stop here and try to do it on your own. Your way might be
 different than the one used in this guide, but the goal here is to get it
@@ -108,25 +108,28 @@ right now, we're only watching Google.com. We need to fix that. In our
 `manifest.json` file, change:
 
 ```json
+
 "matches": [
   "https://www.google.com/*"
 ],
+
 ```
 
 to all sites:
 
 ```json
+
 "matches": [
   "*://*/*"
 ],
+
 ```
 
-In our “scripts/inject.js” file, we’re provided with a skeleton of a javascript
+In our `scripts/inject.js` file, we’re provided with a skeleton of a javascript
 file that runs when the page has completed loading. We can use this to then
-modify all the occurrences of “cloud” with “butt”.
+modify all the occurrences of `cloud` with `butt`.
 
-Here's what our `inject.js` looks like:
-
+Here's what our `inject.js` looks like. Yours might be different:
 
 {% highlight js %}
 chrome.extension.sendMessage({}, function(response) {
@@ -170,7 +173,7 @@ chrome.extension.sendMessage({}, function(response) {
 });
 {% endhighlight %}
 
-Reload your extension, navigate to a page that has "cloud", and _voila_! It's
+Reload your extension, navigate to a page that has `cloud`, and _voila_! It's
 done!
 
 ## Going Further
