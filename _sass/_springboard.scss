@@ -14,7 +14,7 @@ $springboard-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
-        >p,>ul,>pre,>div {
+        >p,>ul,>pre,>div,>ol {
             max-width: $springboard-width;
             margin-left: auto;
             margin-right:auto;
@@ -27,6 +27,9 @@ $springboard-width: 600px;
             padding: 1em;
             font-size: 12px;
             font-family: monospace;
+            &.wrap-code > pre {
+                white-space: pre-wrap;
+            }
         }
         >pre {
             padding-left: 1.5em;
@@ -36,6 +39,10 @@ $springboard-width: 600px;
             >li>ul {
                 padding-left: 1em;
             }
+        }
+
+        ol {
+            padding-left: 1.5em;
         }
         margin-left: auto;
         margin-right: auto;
