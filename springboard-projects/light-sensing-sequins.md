@@ -10,7 +10,8 @@ For this project we will also be using a few other components. The main one is a
 
 ### Wiring up the sensor.
 
-Now we get to wiring up some real hardware. Use the aligator clips to connect the sensor as shown in the picture. You'll want to wire SDA to SDA, SCL to SCL, 3V to the 3.3v, and GND (ground)to GND. 
+Now we get to wiring up some real hardware. You'll want to wire SDA to SDA, SCL to SCL, 3V to the 3.3v, and GND (ground)to GND. 
+
 The SCL and SDA pins are used to handle serial data. SCL is the clock that sets how fast data transmits and SDA is the actual data line.
 
 ### Testing the code

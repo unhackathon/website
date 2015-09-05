@@ -33,9 +33,9 @@ Thread the crimping bead onto the other end of the wire and over the end of the 
 
 Now we get to the actual connections to be made with the LCD. For the finished product we would like to use thread, but that is hard to test on a table since there is nothing stopping the thread from sliding together and shorting the connection. Therefore, we will be using alligator clips for testing, and only sewing into a hat after all the connections are figured out. 
 
-First plug all of your wires into the LCD board as in the diagram. Note that red goes to the Vin and black goes to ground. This is wiring convention, but you don't strictly have to follow it.
+First plug all of your wires into the LCD board. You'll want a red wire to Vin, and a black wire to ground (that's electronics convention), and wires to SCK, TCS, RST, DC, and CCS.  Note that red goes to the Vin and black goes to ground. This is wiring convention, but you don't strictly have to follow it.
 
-Next, disconnect your Flora from power and alligator clip the wires on the board to the following plates on your Flora, matching the diagram:
+Next, disconnect your Flora from power and alligator clip the wires on the board to the following plates on your Flora
 
 Vin -> 3.3V
 Gnd -> Gnd
@@ -86,13 +86,13 @@ Now, try uploaded the script. If all went well, you should see some patterns and
 
 ### Connections to be made (BLE device)
 
-Luckily our bluetooth device is made to work perfectly with the RX/TX ports on the Flora. Simply connect the wires according to the diagram using alegator clips. 
+Luckily our bluetooth device is made to work perfectly with the RX/TX ports on the Flora. Simply wire Gnd to Gnd, 3.3V to 3.3V, and RX to TX and vice versa (because one device transmits on a port while the other recieves on it. 
 
 ### Bluetooth libraries + program
 
 These libraries can also be installed using the library manager. Simply look for Adafruit BluefruitLE nRF51 library and install it. We will again be basing our code off of an example, but in this case it will be based off of the Adafruit BlueFruitLE nRF51 -> bleuart_datamode example. 
 
-When you load up this example you'll notice that there are a couple files. Much of the configuration for the board lives in BlueFruitConfig.h. The main two items you'll want to change are to change the value of BLUEFRUIT_UART_MODE_PIN to -1 since we don't use it at all (you'll note that we didn't wire up the mode plate on the bluetooth chip), and to also remove the ifdef around `#define BLUEFRUIT_HWSERIAL_NAME      Serial1`. The other pin settings should be correct if you wired the module the same as the diagram.
+When you load up this example you'll notice that there are a couple files. Much of the configuration for the board lives in BlueFruitConfig.h. The main two items you'll want to change are to change the value of BLUEFRUIT_UART_MODE_PIN to -1 since we don't use it at all (you'll note that we didn't wire up the mode plate on the bluetooth chip), and to also remove the ifdef around `#define BLUEFRUIT_HWSERIAL_NAME      Serial1`. The other pin settings should be correct if you wired the module using the instructions above.
 
 Once those changes are done, you should be able to upload the sketch to the Flora. Unfortunately, Bluetooth libraries aren't very useful without someone to bluetooth with.
 
