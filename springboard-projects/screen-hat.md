@@ -2,6 +2,10 @@
 layout: springboard
 title: LCD on a hat
 ---
+## LCD on a hat
+
+In this project we will be creating a wearable hat that will display text based on information sent to it by your phone. We will be using the Adafruit's Flora microprocessor board, along with a breakout board with a low-powered LCD on it and a low energy Bluetooth board.  
+
 {% include flora-starter.md %}
 
 
@@ -27,9 +31,9 @@ Thread the crimping bead onto the other end of the wire and over the end of the 
 
 ### Connections to be made (LCD)
 
-Now we get to the actual connections to be made with the LCD. For the finished product we would like to use thread, but that is hard to test on a table since there is nothing stopping the thread from sliding together and shorting the connection. Therefor, we will be using alligator clips for testing, and only sewing into a hat after all the connections are figured out. 
+Now we get to the actual connections to be made with the LCD. For the finished product we would like to use thread, but that is hard to test on a table since there is nothing stopping the thread from sliding together and shorting the connection. Therefore, we will be using alligator clips for testing, and only sewing into a hat after all the connections are figured out. 
 
-First plugin al of your wires to the LCD board as in the diagram. Note that red goes to the Vin and black goes to ground, this is wiring convention.
+First plug all of your wires into the LCD board as in the diagram. Note that red goes to the Vin and black goes to ground. This is wiring convention, but you don't strictly have to follow it.
 
 Next, disconnect your Flora from power and alligator clip the wires on the board to the following plates on your Flora, matching the diagram:
 
@@ -45,11 +49,12 @@ When you reconnect your Flora to your laptop, the LCD should be backlit with not
 
 ### Graphics library + example program.
 
-We'll need to download another library to use the display device. Go to Sketch -> Include Library -> Manage Libraries and search for 'ST7735', then add the Adafruit ST7735 library. After that, search again, this time for Adafruit GFX Library.
+We'll need to download another library to use the display device. Go to Sketch -> Include Library -> Manage Libraries and search for 'ST7735', then add the Adafruit ST7735 library. After that, search again, this time for Adafruit GFX Library and install it as well.
 
 Next we're going to develop from an example: Go to File-> Examples, and select the 'graphicstest' example under 'Adafruit ST7735 library'. Once you load it, you should immediately save. The arduino IDE will then prompt you to pick a new save location so that you can make the example your own.
 
-[Image here]
+![Getting the graphicstest example](img/neopixel-library.png)
+
 ##### Slight modifications
 The pins we're planning on using don't match up with the sample programs' pins, so we're going to need to modfy them. Change the define statements at the top of the file to match the following
 {% highlight c++ %}
@@ -87,7 +92,7 @@ Luckily our bluetooth device is made to work perfectly with the RX/TX ports on t
 
 These libraries can also be installed using the library manager. Simply look for Adafruit BluefruitLE nRF51 library and install it. We will again be basing our code off of an example, but in this case it will be based off of the Adafruit BlueFruitLE nRF51 -> bleuart_datamode example. 
 
-When you load up this example you'll notice that there are a couple files. Much of the configuration for the board lives in BlueFruitConfig.h. The main two items you'll want to change are to change the value of BLUEFRUIT_UART_MODE_PIN to -1 since we don't use it at all (you'll note that we didn't wire up the mode plat on the bluetooth chip), and to also remove the ifdef around `#define BLUEFRUIT_HWSERIAL_NAME      Serial1`. The other pin settings should be correct if you wired the module the same as the diagram.
+When you load up this example you'll notice that there are a couple files. Much of the configuration for the board lives in BlueFruitConfig.h. The main two items you'll want to change are to change the value of BLUEFRUIT_UART_MODE_PIN to -1 since we don't use it at all (you'll note that we didn't wire up the mode plate on the bluetooth chip), and to also remove the ifdef around `#define BLUEFRUIT_HWSERIAL_NAME      Serial1`. The other pin settings should be correct if you wired the module the same as the diagram.
 
 Once those changes are done, you should be able to upload the sketch to the Flora. Unfortunately, Bluetooth libraries aren't very useful without someone to bluetooth with.
 
@@ -99,14 +104,13 @@ Once the app is downloaded, open it and connect to the 'Adafruit Flora BLE' devi
 
 Once you have done that, you should also open the Serial Monitor (Tools -> Serial Monitor). You should see a message about "Switching to DATA mode!" If you see that, then you can start typing in the text field in your phone, and the characters you type should show up in the Serial Monitor on your computer.
 
-### Program that displays text sent from Adafruit App
+### Display text sent from Adafruit App
 
 Now that we know both of our components work individually, we're going to do the real programming for this project, which is combining our individual code lego peices into a more powerful whole.
 
 We're going to interleave the chunks of each of our previous sketches, and remove some of the pointless demo cruft that existed in them previously. Either open a new sketch in the Arduino IDE or blank out an existing one. This is going to be fun.
 
 First we need to combine all the header imports so we know that we have all the functions and variables we need. Grab the headers from both the graphics and the bluetooth demo applications and put them at the top of your sketch. You should get something like the following:
-
 
 
 {% highlight c++ %}
@@ -122,7 +126,10 @@ First we need to combine all the header imports so we know that we have all the 
 #include "Adafruit_BluefruitLE_UART.h"
 {% endhighlight %}
 
+Next we have the initialization for the graphics display:
+
 {% highlight c++ %}
+
 // For the breakout, you can use any 2 or 3 pins
 // These pins will also work for the 1.8" TFT shield
 #define TFT_CS     10
@@ -134,27 +141,36 @@ First we need to combine all the header imports so we know that we have all the 
 // (for UNO thats sclk = 13 and sid = 11) and pin 10 must be
 // an output. This is much faster - also required if you want
 // to use the microSD card (see the image drawing example)
-Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS,  TFT_DC, TFT_RST);
+//Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS,  TFT_DC, TFT_RST);
 
 // Option 2: use any pins but a little slower!
 #define TFT_SCLK 12   // set these to be whatever pins you like!
 #define TFT_MOSI 6   // set these to be whatever pins you like!
-//Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
+Adafruit_ST7735 tft = 
+    Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
+{% endhighlight %}
 
-float p = 3.1415926;
+And initialization for the bluetooth:
 
+
+{% highlight c++ %}
 // COMMON SETTINGS
-// ----------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------
 // These settings are used in both SW UART, HW UART and SPI mode
-// ----------------------------------------------------------------------------------------------
-#define BUFSIZE                        128   // Size of the read buffer for incoming data
-#define VERBOSE_MODE                   true  // If set to 'true' enables debug output
+// ----------------------------------------------------------------------
+#define BUFSIZE                        128   // Size of the read buffer
+#define VERBOSE_MODE                   true  // Enables debug output
 
 #define BLUEFRUIT_HWSERIAL_NAME      Serial1
 #define BLUEFRUIT_UART_MODE_PIN        -1    // Set to -1 if unused
 /* ...or hardware serial, which does not need the RTS/CTS pins. Uncomment this line */
 Adafruit_BluefruitLE_UART ble(BLUEFRUIT_HWSERIAL_NAME, BLUEFRUIT_UART_MODE_PIN);
+{% endhighlight %}
 
+And we have a setup function for the BlueFruit to be called from the main setup function. This is basically copied and pasted from the setup method of the Adafruit Bluetooth example:
+
+
+{% highlight c++ %}
 // A small helper
 void error(const __FlashStringHelper*err) {
   Serial.println(err);
@@ -200,7 +216,11 @@ void setupBluefruit(void)
 
   Serial.println(F("******************************"));
 }
+{% endhighlight %}
 
+And now we add the setup code from the graphics example. In this case, however, we can leave out a lot of the extra code that renders cool patterns, since we don't need them. We'll leave in the code that renders Lorem ipsum though, so we know when everything has initialized.
+
+{% highlight c++ %}
 void testdrawtext(char *text, uint16_t color) {
   tft.setCursor(0, 0);
   tft.setTextColor(color);
@@ -225,15 +245,14 @@ void setupScreen(void) {
   tft.fillScreen(ST7735_BLACK);
   testdrawtext("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur adipiscing ante sed nibh tincidunt feugiat. Maecenas enim massa, fringilla sed malesuada et, malesuada sit amet turpis. Sed porttitor neque ut ante pretium vitae malesuada nunc bibendum. Nullam aliquet ultrices massa eu hendrerit. Ut sed nisi lorem. In vestibulum purus a tortor imperdiet posuere. ", ST7735_WHITE);
 }
+{% endhighlight %}
 
-// Pin D7 has an LED connected on FLORA.
-// give it a name:
-int led = 7;
- 
+Finally we get to the meat of the program, which is printing on the screen. This setup routine will set our screen to have a black background and white text. The loop routine will simply loop checking for data over blootooth, and if it sees it, will print it on the screen.
+
+{% highlight c++ %}
 // the setup routine runs once when you press reset:
 void setup() {                
   // initialize the digital pin as an output.
-  pinMode(led, OUTPUT);
   Serial.begin(9600);
   Serial.print("Hello! ST7735 TFT Test\n");  
   setupScreen();
@@ -260,8 +279,15 @@ void loop() {
 }
 {% endhighlight %}
 
+### Other expansion options
+Congratulations! You've completed all the coding and prototyping for this project. There are lots of ways to expand this project. You can use any of the data that the Adafruit app passes along to display on your screen, or you can [fork the Adafruit app on github](https://github.com/adafruit/Adafruit_Android_BLE_UART) and modify it to send phone sensor data, API results, or anything else along.
+
 ### Sewing to the hat
 
-### Other expansion options
+Now that you have a working electrical circuit, you can turn it into a wearable. The next goal is to emulate that circuit with conductive thread. In order to do this, you'll need to place the screen on the front of the hat, and the flora positioned on the side of the hat. Then, for each wire from the original prototype, thread the wire through the wire hoop we created earlier, and stitch over to the corresponding plate on the Flora. Next, wrap the thread at least three times around both the hoop and the plate, and then tie it off and cut off any remaining loose thread.
+
+After you stitch each thread, test the circuitry by running your program. That way you'll know which thread, if any, is problematic. Once all the thread is stitched and all the boards are attached, you can use a battery pack to power the devices for portability. 
 
 #### Link to Adafruit 
+
+Congratulations on your hack! if you want more ideas, Adafruit has tons of good example projects as well as documentation for how to implement them. Just go to [https://learn.adafruit.com/](https://learn.adafruit.com/) to learn more about different wearable and other microcontroller products.
