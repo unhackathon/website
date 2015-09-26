@@ -273,12 +273,22 @@ A real server
 
 The next part of this project will involve writing a websocket server that simply echoes the points you want to draw back on the same websocket. Once this is done, we will know that the client side of our drawing project will draw whatever it receives over the socket, and all that will be left is writing the server-side code to relay drawing commands to multiple pelople.
 
-The first order of business is to make sure that we can handle WebSocket connections. We're going to need to install the websocket module, which you can do by running `go get golang.org/x/net/websocket`
+The first order of business is to make sure that we can handle WebSocket connections. We're going to need to install the Gorilla WebSocket module, which you can do by running `go get github.com/gorilla/websocket`
 
-Next we define a function "socketConnected" that will ensure that we can in fact handle inbound websocket connections.
+Next we add a global Upgrader and define a function "websocketHandler" that will ensure that we can in fact handle inbound websocket connections.
 
 {% highlight go %}
-func socketConnected(ws *websocket.Conn) {
+var upgrader = websocket.Upgrader{
+    ReadBufferSize:  1024,
+    WriteBufferSize: 1024,
+}
+
+func websocketHandler(w http.ResponseWriter, r *http.Request) {
+    socket, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
     fmt.Println("Socket connected")
 }{% endhighlight %}
 
@@ -286,7 +296,7 @@ And add the following line to the top of your main function.
 
 
 {% highlight go %}
-http.Handle("/socket", websocket.Handler(socketConnected));
+http.HandleFunc("/socket", websocketHandler);
 {% endhighlight %}
 
 In your javascript code, simply add the line
@@ -310,7 +320,7 @@ type point struct {
 
 This struct will be used to parse and send messages that represent points. In particular, this uses a language feature in go called 'tags'. You'll notice that X and Y are each 'tagged' with info to the JSON parset that tells it what name to deserialize and serializze properties to. This is necessary because we want X and Y on the point itself to be public, and in Go, public members have to start with an uppercase letter.
 
-Finally, to finish off our changes to the go server, remove the "socketConnected" function, and add the following function. 
+Finally, to finish off our changes to the go server add the following function. 
 {% highlight go %}
 // Echo the data received on the WebSocket.
 func echoServer(ws *websocket.Conn) {
@@ -330,7 +340,17 @@ func echoServer(ws *websocket.Conn) {
 }
 {% endhighlight %}
 
-Then change the websocket handler to use this function as well.
+Then change the websocketHandler function to call the echo server on as a new Goroutine (or lightweight thread)
+
+{% highlight go %}
+func websocketHandler(w http.ResponseWriter, r *http.Request) {
+    socket, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+    go echoServer(socket)
+}{% endhighlight %}
 
 {% highlight go %} http.Handle("/socket", websocket.Handler(echoServer)); {% endhighlight %}
 
@@ -350,7 +370,6 @@ type point struct {
 }
 
 // Echo the data received on the WebSocket.
-// Echo the data received on the WebSocket.
 func echoServer(ws *websocket.Conn) {
     var p point
     //Make sure we close before we leave the function
@@ -367,6 +386,15 @@ func echoServer(ws *websocket.Conn) {
     }
 }
 
+func websocketHandler(w http.ResponseWriter, r *http.Request) {
+    socket, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+    go echoServer(socket)
+}
+
 func main() {
     http.Handle("/socket", websocket.Handler(echoServer));
     http.Handle("/", http.FileServer(http.Dir("public")))
@@ -375,11 +403,11 @@ func main() {
 }
 {% endhighlight %}
 
-This server will echo the points it recieves over the websocket connection back to the client websocket.
+This server will echo the points it receives over the websocket connection back to the client websocket.
 
 The client side drawing code
 ---------------------
-That is all well and good, but our client still doesn't know how to deal with messages from the server. The only two changes we need to make to have a working networked drawing client are have the client send the message to the server when you click and drag, and to do the actual drawing when it recieves a messages from the server.
+That is all well and good, but our client still doesn't know how to deal with messages from the server. The only two changes we need to make to have a working networked drawing client are have the client send the message to the server when you click and drag, and to do the actual drawing when it receives a messages from the server.
 
 Modify the code in mouseMove to look like this:
 ```
@@ -398,13 +426,13 @@ Now we send the messages whenever the mouse is moved, but we never actually draw
 Add the following code anywhere after the websocket is setup
 
 ```
-    function messageRecieved(evt) {
+    function messageReceived(evt) {
         var point = JSON.parse(evt.data);
         drawPoint(point.x, point.y);
     }
-    ws.onmessage = messageRecieved;
+    ws.onmessage = messageReceived;
 ```
-This tells the websocket that any time it recieves a message, it should call the messageRecieved function, which will take the message that it got, deserialize it to a point, and then pass it to the drawPoint method.
+This tells the websocket that any time it receives a message, it should call the messageReceived function, which will take the message that it got, deserialize it to a point, and then pass it to the drawPoint method.
 
 What this means is that any time we draw in a program, we send a message to the server, and wait to draw until we get the echoed message back. This is inneficient for a single user, but makes programming a multi-person drawing program much simpler.
 
@@ -421,11 +449,11 @@ Your client code should now look like this.
     var counter = 0;
     var ws = new WebSocket("ws://" + window.location.host + "/socket");
 
-    function messageRecieved(evt) {
+    function messageReceived(evt) {
         var point = JSON.parse(evt.data);
         drawPoint(point.x, point.y);
     }
-    ws.onmessage = messageRecieved;
+    ws.onmessage = messageReceived;
 
     function drawPoint(centerX, centerY) {
         radius = 5;
@@ -461,3 +489,161 @@ Your client code should now look like this.
     });
 })();
 {% endhighlight %}
+
+A relay go server
+---------------------
+
+Now we want our Go server to relay between all the connected clients. To do this, we're going to set up a few more data structures. First, we're going to create a relayServer type, so that we don't have global state for our server.
+
+{% highlight go %}
+type relayServer struct {
+    inputChannel chan point
+    newConnections chan *clientConnection
+    closedConnections chan *clientConnection
+    pointsSoFar []point
+}
+
+func newServer() *relayServer {
+    var server = new(relayServer)
+    server.pointsSoFar = make([]point, 0, 1024)
+    server.inputChannel = make(chan point)
+    server.newConnections = make(chan *clientConnection)
+    server.closedConnections = make(chan *clientConnection)
+    return server
+}
+{% endhighlight %}
+
+You'll notice a new type called 'chan' here. Channels are used in go to synchronize individual 'GoRoutines', or lightweight threads of execution. In this case, our server uses channels so that it can hear about new connections, closed connections, and points being input.
+
+Next, we'll need to add a type to manage each connection we receive.
+
+{% highlight go %}
+type clientConnection struct {
+    server *relayServer
+    websocket *websocket.Conn
+    outputChannel chan point
+}
+
+func newConnection(server *relayServer, ws *websocket.Conn) *clientConnection {
+    var conn = new(clientConnection)
+    conn.outputChannel = make(chan point)
+    conn.server = server
+    conn.websocket = ws
+    return conn
+}
+{% endhighlight %}
+
+This connection reverences the previous relayServer type, and also has the websocket connection itself, as well as an output channel so that the server can tell it to output points.
+
+Now we need to write the code that glues all these types together.
+
+For the server, we'll add the following code:
+
+{% highlight go %}
+func (server *relayServer) run() {
+    var connMap = make(map[*clientConnection]*clientConnection)
+    var p point
+    var conn *clientConnection
+    for ;; {
+            log.Println("Waiting for message")
+        select {
+        case p = <-server.inputChannel:
+            log.Println("Message received")
+            //Send the point out on all the channels
+            for _, conn := range connMap {
+                conn.sendMessage(p)
+            }
+            server.pointsSoFar = append(server.pointsSoFar, p)
+        case conn = <-server.newConnections:
+            log.Println("Connection added")
+            // Send out all the messages we've
+            // seen so far to any new connection
+            // so that we stay synchronized
+            connMap[conn] = conn
+            for _, p = range server.pointsSoFar {
+                conn.sendMessage(p)
+            }
+        case conn = <-server.closedConnections:
+            log.Println("Connection lost")
+            delete(connMap, conn)
+        }
+    }
+}
+
+func (server *relayServer) removeConnection(c *clientConnection) {
+    server.closedConnections <- c
+}
+
+func (server *relayServer) addConnection(c *clientConnection) {
+    server.newConnections <- c
+}
+
+func (server *relayServer) handleMessage(p point) {
+    server.inputChannel <- p
+}
+
+
+func (server *relayServer) websocketHandler(w http.ResponseWriter, r *http.Request) {
+    socket, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+
+    var conn = newConnection(server, socket)
+
+    server.addConnection(conn)
+    go conn.receiveMessages()
+    go conn.sendMessages()
+}
+{% endhighlight %}
+
+These functions are slightly different from the other style of go functions. You'll notice that they have a type and a name before the function name. This means that the function is a method, and like methods in java or C++, it operates on an object. Only instead of that object being called "this", the object is given its own name in the declaration of the function. In this case, we call it 'server'.
+
+The 'run' function  does two things. Primarily, it sends point messages that it receives  out to the channels on all the clients. Also, any time a new client connects, all the point messages are replayed to that client so that they have all the same drawn points as another client.
+
+The removeConnection, addConnection, and handleMessage methods are all helper methods that put values onto channels. By using channels here instead of directly operating on the data structure, we avoid all the issues with locking inherent in thread based code. There is a single Goroutine actually modifying the data structure, so there can't be data races.
+
+The final interesting method here is websocketHandler, which now tells the connection object itself to start receiving and sending messages.
+
+Now we need to add the methods for the connection object as well.
+
+{% highlight go %}
+func (conn *clientConnection) sendMessage(p point) {
+    conn.outputChannel <- p
+}
+
+func (conn *clientConnection) recieveMessages() {
+    defer conn.server.removeConnection(conn)
+    var p point
+    for ;; {
+        log.Println("Recieving message0")
+        var err = conn.websocket.ReadJSON(&p)
+        log.Println("Recieving message1")
+        if (err != nil) {
+            log.Print(err)
+            return
+        }
+        log.Println("Recieving message2")
+        conn.server.handleMessage(p)
+    }
+}
+
+func (conn *clientConnection) sendMessages() {
+    for p := range(conn.outputChannel) {
+        log.Println("Sending message")
+        var err = conn.websocket.WriteJSON(p)
+        if (err != nil) {
+            return
+        }
+    }
+}
+{% endhighlight %}
+
+Similar to the server object, we have a helper method to make it easy to send messages. The recieveMessages function sits in an infinit loop and sends any messages it recieves on to the server, while sendMessages listens on the outputChannel for messages to output from the server.
+
+Now, since we've already written the client to rely on data from the server, you should be able ot run your server, and connect to it in two different tabs, or from another computer, and see that everything is synchronized!
+
+### Ideas for expansion
+
+Now that you have drawing synchronized, you can use websockets to synchronize any data you want. You could put images in your canvas, or share urls to background music, or possibly let users SMS in messages that anyone can see. Websockets mean that what one user sees, all users see, creating a fluid and joyful web experience.
