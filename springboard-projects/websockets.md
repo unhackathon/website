@@ -40,8 +40,7 @@ Usage:
 ...
 [/code]
 
-Starting a project in Go
-------------------------
+### Starting a project in Go
 
 Go follows a very strict directory structure, which you can read about [here]. In essence, the positions of everything under $GOPATH are proscribed by go. This is limiting in the sense that you can't set special build directories, but freeing because you don't have to worry about build tools disagreeing about how to compile code and where
 https://golang.org/doc/code.html
@@ -88,8 +87,7 @@ func main() {
 You'll see that this file lists itself as being package 'main'. We'll get to that more later. For now, once you have written this file, run `go run main.go`.
 
 
-Dive into HTML
------------
+### Dive into HTML
 
 In order for our drawing app to work, we're going to need a web based client. This means 3 things, HTML, javascript and css. Create a folder called "public" in your "godraw" folder. This folder should have three files: index.html, main.js, and styles.css, with the following contents:
 
@@ -268,8 +266,7 @@ Finally, you may have wondered why the whole javascript file is wrapped in
 
 This is simply an anonymous function that is immediately called after it is created. It is used in javascript so that variables declared inside the function don't leak out into the global scope and conflict with other names. Transpiled languages such as coffescript do this automatically for you.
 
-A real server
---------------
+### A real server
 
 The next part of this project will involve writing a websocket server that simply echoes the points you want to draw back on the same websocket. Once this is done, we will know that the client side of our drawing project will draw whatever it receives over the socket, and all that will be left is writing the server-side code to relay drawing commands to multiple pelople.
 
@@ -490,8 +487,7 @@ Your client code should now look like this.
 })();
 {% endhighlight %}
 
-A relay go server
----------------------
+### A relay go server
 
 Now we want our Go server to relay between all the connected clients. To do this, we're going to set up a few more data structures. First, we're going to create a relayServer type, so that we don't have global state for our server.
 
