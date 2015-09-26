@@ -74,7 +74,7 @@ https://github.com/adibalwani03/ClickZilla
     You can name these anything you want. I called the app ClickZilla and and the general convention for package name is com.&lt;yourhandle&gt;.&lt;appname&gt;
 
 
-![New Project](img/startproject.png)
+![New Project](img/startproject.PNG)
 
 ### Support
 
