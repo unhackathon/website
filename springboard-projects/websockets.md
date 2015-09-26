@@ -13,12 +13,12 @@ Websockets provide an interface similar to a TCP socket, except in the web brows
 
 In this project we will create a simple shared drawing app using Go, javascript, and websockets. In particular, languages such as Go show their strength incredibly well at executing highly concurrent code.
 
-Google provides binary packages for GoLang at their website. On OS X and Windows you can set 
+Google provides binary packages for GoLang at their website. On OS X and Windows you can set
 
 OS X and LINUX:
 {% highlight bash %}
 #env.sh
-export PATH=/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=~/godraw/
 {% endhighlight %}
 Windows:
@@ -28,7 +28,7 @@ $env:Path = $env:Path + ";C:\go\bin"
 $env:GOPATH = /Users/{name}/godraw/
 {% endhighlight %}
 
-On linux you can run "`. env.sh`"" to source the environment file. On windows run "`./env.ps1`" to run the powershell file 
+On linux you can run "`. env.sh`" to source the environment file. Source is a bash shell built-in command that executes the content of the file passed as argument, in the current shell. It is different from using "`./<filename>`" as runs the script as an executable file, launching a new shell to run it, while using "`. <filename>`" reads and executes the commands in the current shell. On windows run "`./env.ps1`" to run the powershell file
 
 If all goes well, you should see the following when you run 'go' on the shell.
 [code]
@@ -42,8 +42,8 @@ Usage:
 
 ### Starting a project in Go
 
-Go follows a very strict directory structure, which you can read about [here]. In essence, the positions of everything under $GOPATH are proscribed by go. This is limiting in the sense that you can't set special build directories, but freeing because you don't have to worry about build tools disagreeing about how to compile code and where
-https://golang.org/doc/code.html
+Go follows a very strict directory structure, which you can read about [here](https://golang.org/doc/code.html). In essence, the positions of everything under $GOPATH are proscribed by go. This is limiting in the sense that you can't set special build directories, but freeing because you don't have to worry about build tools disagreeing about how to compile code and where
+
 
 Here is the example from the above page:
 ```
@@ -71,7 +71,7 @@ src/
 All go source code goes into the src directory. You'll see that the files in hello and outyet are compiled into binaries, while the files  in stringutil are compiled into a package. Go determines whether files consitute a command or a package based on whether they are listed as being in package "main" and whether they contain a "main" function.
 
 To start our project, we are going to create a file called "main.go" in folder "godraw" under the "src" directory of our $GOPATH.
-```
+{% highlight go %}
 package main
 
 import "net/http"
@@ -82,7 +82,7 @@ func main() {
     fmt.Println("Running webserver on port 8080")
     http.ListenAndServe(":8080", nil);
 }
-```
+{% endhighlight %}
 
 You'll see that this file lists itself as being package 'main'. We'll get to that more later. For now, once you have written this file, run `go run main.go`.
 
@@ -156,7 +156,7 @@ body {
 }
 {% endhighlight %}
 
-However, since drawing is interactive, most of the meat of the experience is in the javascript. 
+However, since drawing is interactive, most of the meat of the experience is in the javascript.
 
 {% highlight javascript %}
 (function () {
@@ -257,7 +257,7 @@ This is the code that handles drawing our circles. If the mouse is down, it draw
 
 Finally, we add two event listeners, one to tell us when the mouse has been clicked in the canvas, and another to tell us if the mouse has been released anywhere on the window. This handles the case where someone clicks on the canvas and drags off it, releasing the mouse button. We add and remove the mouseMove handler depending on whether the mouse is down or not, so that we can avoid the expense of running extra javascript whenever the mouse moves, even if you're not dragging.
 
-Finally, you may have wondered why the whole javascript file is wrapped in 
+Finally, you may have wondered why the whole javascript file is wrapped in
 {% highlight javascript %}
 (function () {
     ...
@@ -317,7 +317,11 @@ type point struct {
 
 This struct will be used to parse and send messages that represent points. In particular, this uses a language feature in go called 'tags'. You'll notice that X and Y are each 'tagged' with info to the JSON parset that tells it what name to deserialize and serializze properties to. This is necessary because we want X and Y on the point itself to be public, and in Go, public members have to start with an uppercase letter.
 
-Finally, to finish off our changes to the go server add the following function. 
+<<<<<<< Updated upstream
+Finally, to finish off our changes to the go server add the following function.
+=======
+Finally, to finish off our changes to the go server, remove the "socketConnected" function, and add the following function.
+>>>>>>> Stashed changes
 {% highlight go %}
 // Echo the data received on the WebSocket.
 func echoServer(ws *websocket.Conn) {
@@ -407,7 +411,7 @@ The client side drawing code
 That is all well and good, but our client still doesn't know how to deal with messages from the server. The only two changes we need to make to have a working networked drawing client are have the client send the message to the server when you click and drag, and to do the actual drawing when it receives a messages from the server.
 
 Modify the code in mouseMove to look like this:
-```
+{% highlight go %}
 function mouseMove(evt) {
         if (mouseIsDown) {
             ws.send(JSON.stringify({
@@ -416,26 +420,26 @@ function mouseMove(evt) {
             }))
         }
     }
-```
+{% endhighlight %}
 This tells mouseMove to serialize the javascript object into JSON so that we can send it to our server. Note that the 'x' and 'y' are lowercase, matching the tags we set up in go earlier.
-Now we send the messages whenever the mouse is moved, but we never actually draw the point if we get a message. 
+Now we send the messages whenever the mouse is moved, but we never actually draw the point if we get a message.
 
 Add the following code anywhere after the websocket is setup
 
-```
+{% highlight go %}
     function messageReceived(evt) {
         var point = JSON.parse(evt.data);
         drawPoint(point.x, point.y);
     }
     ws.onmessage = messageReceived;
-```
+{% endhighlight %}
 This tells the websocket that any time it receives a message, it should call the messageReceived function, which will take the message that it got, deserialize it to a point, and then pass it to the drawPoint method.
 
 What this means is that any time we draw in a program, we send a message to the server, and wait to draw until we get the echoed message back. This is inneficient for a single user, but makes programming a multi-person drawing program much simpler.
 
 Your client code should now look like this.
 
-{% highlight javascript %} 
+{% highlight javascript %}
 (function () {
     "use strict";
     var canvas = document.getElementById("canvas");
