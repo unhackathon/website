@@ -7,7 +7,7 @@ title: Intro To Android Programming
 ## Intro
 
 ### What is Android?
-Android is a Linux Kernel based operating system developed by Google. 
+Android is a Linux Kernel based operating system developed by Google.
 It originally started as a mobile OS, but has now expanded to:
 
 #### Android TV
@@ -25,10 +25,10 @@ It originally started as a mobile OS, but has now expanded to:
 ### Why Android?
 
 * Thousands of Unique devices supported
-* Written in Java 
+* Written in Java
 * Amazing IDE
 * Play store is more lax.
-* Well documented 
+* Well documented
 
 ### Getting Started
 Development in android is done in Android Studio, a Google developed IDE that makes working on Android simple and fun! You should go ahead and snag the IDE [online](https://developer.android.com/sdk/index.html), or ask your local organizer for a preloaded thumb drive.
@@ -48,7 +48,7 @@ Development in android is done in Android Studio, a Google developed IDE that ma
 ### What do these words mean?
 
 * Activity
-    - Activities are the basic building blocks of your 
+    - Activities are the basic building blocks of your
     - Each screen in your app would be an activity
 * Actionbar/Toolbar
     - The toolbar at the top is known as the ActionBar (Renamed to Toolbar in Lollipop)
@@ -78,8 +78,8 @@ https://github.com/adibalwani03/ClickZilla
 
 ### Support
 
-You can support as many systems as you want. 
-I tend to prefer supporting anything Android 4.0 or above. 
+You can support as many systems as you want.
+I tend to prefer supporting anything Android 4.0 or above.
 
 Android 2.3 is now dead, so no need to support that and android 3.0 is just plain weird so I like to pretend that never happened.
 
@@ -88,7 +88,7 @@ You can also add support for Google glass, TV and Wear if you want.
 
 ### Activity Templates
 
-And now you’ll be taken to the templates screen which contain prebuild activities you can use. For this one, we will be sticking to a blank activity (or a blank with fragment) but you can choose anything you want (Except Login activity and preference acitivity, those are for specific purposes) 
+And now you’ll be taken to the templates screen which contain prebuild activities you can use. For this one, we will be sticking to a blank activity (or a blank with fragment) but you can choose anything you want (Except Login activity and preference acitivity, those are for specific purposes)
 
 ![Choose Activity Type](img/chooseactivity.png)
 
@@ -136,14 +136,14 @@ Here you can see the basic file structure of your app. Each folder here has a sp
 
 The Manifests directory is where you declare your AndroidManifest.xml and any other manifests.
 ![Manifests](img/manifests.png)
-The purpose of the manifest is to specify things for the device including declarations of all activities, all permissions required (eg. Internet, Wifi, I/O), special hardware requirements (camera, flash, gyro etc) and certain google APIs (eg. maps) and other things that can possibly affect compatibility. 
+The purpose of the manifest is to specify things for the device including declarations of all activities, all permissions required (eg. Internet, Wifi, I/O), special hardware requirements (camera, flash, gyro etc) and certain google APIs (eg. maps) and other things that can possibly affect compatibility.
 
 NOTE : Some of the tasks a manifest does is now also being done by the build.gradle such as declaring minimum android version
 
 #### Java Packages
 
-The java folder is where all your packages are declared, and inside those are all your java files. 
-Most of your code would go in the main package. 
+The java folder is where all your packages are declared, and inside those are all your java files.
+Most of your code would go in the main package.
 
 I personally have never used the AndroidTest package, so I can’t say much on that, but i’m guessing its for making test cases for the app (If someone knows, do tell me and will update the slides).
 ![Java](img/javafolders.png)
@@ -166,15 +166,15 @@ The res folder is the real deal. This folder contains all the graphics+ui stuff 
 
 #### Gradle
 
-This is where all the gradle files reside. 
+This is where all the gradle files reside.
 Usually you’ll only be making small changes to the build.gradle in the App Module
 Other than that, its mostly left untouched
 ![Gradle](img/gradlefolder.png)
 
 ### Layouts
 
-Now lets head over the activity_main.xml and you’ll probably be brought the design GUI. From the left pane you can drag and drop objects onto the screen and the layout xml will automatically change to add the new item. 
-Easy peasy stuff, but often annoying. 
+Now lets head over the activity_main.xml and you’ll probably be brought the design GUI. From the left pane you can drag and drop objects onto the screen and the layout xml will automatically change to add the new item.
+Easy peasy stuff, but often annoying.
 And so we move onto the actual XML -&gt;
 
 #### activity_main.xml (text view)
@@ -194,10 +194,10 @@ Going through it line by line we have :
 
 #### MainActivity.java
 
-The autogenerated java code. It contains the following things : 
+The autogenerated java code. It contains the following things :
 
 * `public class MainActivity extends ActionBarActivity`
-    - Declaration of your Activity and it inherits from ActionBarAcitivity (which in turn inherits from FragmentActivity which inhertis from Activity), which means you will have an Actionbar in your app and you can put Fragments in it too. 
+    - Declaration of your Activity and it inherits from ActionBarAcitivity (which in turn inherits from FragmentActivity which inhertis from Activity), which means you will have an Actionbar in your app and you can put Fragments in it too.
     - You can change it to just Activity in which case it won’t have an actionbar or fragment support (which you don’t need for this one)
 * `protected void onCreate(Bundle savedInstanceState)`
     - This method is automatically executed when this Activity is created. It is essentially your constructor.
@@ -222,7 +222,7 @@ Adding a button and Showing messages to users
 
 ### Modifying TextView
 
-So lets start with adding a button to the activity_main.xml. You can remove the existing textview if you want, or you can keep it, i’ll be keeping it for now, but changing the text to “Welcome To ClickZilla”. Also, if you’re keeping it, add the following lines of code to the textview declaration : 
+So lets start with adding a button to the activity_main.xml. You can remove the existing textview if you want, or you can keep it, i’ll be keeping it for now, but changing the text to “Welcome To ClickZilla”. Also, if you’re keeping it, add the following lines of code to the textview declaration :
 
     android:id="@+id/welcome"
     android:layout_alignParentTop="true"
@@ -232,8 +232,8 @@ IDs are given to views to refer to them in the program or for layout purposes an
 
 ### Adding a Button
 
-Now, to add the button, add the following block of code inside the RelativeLayout : 
- 
+Now, to add the button, add the following block of code inside the RelativeLayout :
+
 {% highlight xml %}   
     <Button android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -255,7 +255,7 @@ At the end, if you go to your Design tab, your layout preview should look someth
 
 ### Making the Button Do Work
 
-Now that we have a button that calls “buttonClicked” we need to write that method. We also need to provide feedback to the User to show something happened when the button is clicked. 
+Now that we have a button that calls “buttonClicked” we need to write that method. We also need to provide feedback to the User to show something happened when the button is clicked.
 The purpose of the ClickZilla is to count how many times the button was pressed. So lets make counter in the MainActivity class.
 int clickCounter = 0;
 To provide feedback we use an Android Library called Toast. Toasts a are small messages that fade in and out and are extremely useful for providing feedback. Now to create the method that reacts to the button press, add this to the MainActivity :
@@ -265,16 +265,16 @@ public void buttonClicked(View v) {
     clickCounter++;
     Toast.makeText(
         getApplicationContext(),
-        "The Button has been clicked " + clickCounter + " times", 
+        "The Button has been clicked " + clickCounter + " times",
         Toast.LENGTH_SHORT
     ).show();
 }
 {% endhighlight %}
 
-Whats new is the argument View v. Anything in your android application is a View. TextView, Buttons, Radios all are children of View. So in this case, the argument is just a reference to which button was clicked. But we don’t need that for now. 
+Whats new is the argument View v. Anything in your android application is a View. TextView, Buttons, Radios all are children of View. So in this case, the argument is just a reference to which button was clicked. But we don’t need that for now.
 Toast.makeText is the method used to make Toasts. It takes in three arguments, the first one specifies where the toast is displayed, which in this case is the application context. The second is the message to be displayed and the third is the length. Finally, you need to call .show() to actually display the toast but luckily Android studio is nice enough to warn you if you ever forget :)
 
-Fun Fact : Toasts are called toasts because originally they would pop in from the bottom like a toast coming out of toaster! 
+Fun Fact : Toasts are called toasts because originally they would pop in from the bottom like a toast coming out of toaster!
 
 ### Time to test the App!
 
@@ -286,13 +286,13 @@ There are 2 easy ways of doing this!
 
 Android Debug Bridge aka ADB is a tool used to debug android applications (Surprise Surprise!). Of course you need an Android Device to do this.
 To get started, you need to have the Google Drivers which you can install from the SDK Manager.
-After that simply enable USB Debugging in your phone’s Developer options and connect it using USB and you’ll see a screen like this when you run the app. 
+After that simply enable USB Debugging in your phone’s Developer options and connect it using USB and you’ll see a screen like this when you run the app.
 
 ![Choosing device](img/chooseRunningDevice.png)
 
 #### Method 2 : Android Emulator
 
-If you don’t have an Android Device, fear not! Android Studio comes to the rescue! 
+If you don’t have an Android Device, fear not! Android Studio comes to the rescue!
 Android Studio comes with an Android Virtual Device (AVD) (Assuming you chose to install on during the installation). All you need is to chose Launch Emulator from the window displayed on the previous slide and your emulator would be ready in a few minutes.
 If you chose not to install an AVD, you can create one right now using the AVD Manager though you may need to download the system images using the SDK Manager.
 However, these virtual devices are usually slow, so you should only go for this method if you don’t have a compatible android device.
@@ -307,11 +307,11 @@ Now lets make more!
 
 ## ClickZilla Part 2
 
-Creating another Activity and passing data back and forth. 
+Creating another Activity and passing data back and forth.
 
 ### Creating Another Activity
 
-Now that we have an activity to increment the counter, lets add another one to decrement it. 
+Now that we have an activity to increment the counter, lets add another one to decrement it.
 So go into the porject explorer and right click anywhere and choose New > Activity > Blank Activity
 Name the activity as DecrememntActivity and hit finish.
 
@@ -319,17 +319,17 @@ Name the activity as DecrememntActivity and hit finish.
 
 ### Time to use what you've learned
 
-Modify the MainActivity to have another button which calls launchDecrementActivity() and modify the DecrementActivity to have a button which also calls buttonClicked(). This is what the final activities should look like: 
+Modify the MainActivity to have another button which calls launchDecrementActivity() and modify the DecrementActivity to have a button which also calls buttonClicked(). This is what the final activities should look like:
 
-![Main Activity](img/MainActivityDecrementButton.png)
+![Main Activity](img/mainActivityDecrementButton.png)
 
-![Dispatch Activity](img/DecrementActivity.PNG)
+![Dispatch Activity](img/DecrementActivity.png)
 
 ### How to launch this new Activity
 
-So now that we have a new Activity, we want to launch this activity and send the value of the current counter to the new activity. This is handled using Intents. 
-To launch an activity, you create and Intent for the activity and then add any extra values to the intent with a key-value pair and then simply launch the activity. 
-To do so, put the following code as the onClick for your launchDecrementActivity button: 
+So now that we have a new Activity, we want to launch this activity and send the value of the current counter to the new activity. This is handled using Intents.
+To launch an activity, you create and Intent for the activity and then add any extra values to the intent with a key-value pair and then simply launch the activity.
+To do so, put the following code as the onClick for your launchDecrementActivity button:
 ```java
     public void launchDecrementActivity(View v) {
         Intent intent = new Intent(getApplicationContext(), DecrementActivity.class);
@@ -363,10 +363,11 @@ To do so, we override the onBackPressed of the DecrementActivity using this bloc
         Intent intent = new Intent();
         intent.putExtra("counterValue",clickCounter);
         setResult(RESULT_OK,intent);
+        super.onBackPressed();
     }
 {% endhighlight %}   
-Now, in the parent class, we replace our original startActivity(intent) with startActivityForResult(intent,1); and add the following method to receive the result : 
-    
+Now, in the parent class, we replace our original startActivity(intent) with startActivityForResult(intent,1); and add the following method to receive the result :
+
 {% highlight java %}   
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -383,11 +384,11 @@ And you’re all Set!
 
 So now that we have a basic app, lets see how we can manage users and authentication and other cool stuff
 
-To do all this, we are going to use this magical library called Parse API. 
+To do all this, we are going to use this magical library called Parse API.
 
 ### Setting up the Parse SDK
 
-So first of, you need to download the Parse SDK, so go https://parse.com/docs/downloads and download the latest Android SDK. Save the zip file and drag it into the 'libs' folder of your Android Studio Project. and add the following line to your build.gradle dependencies 
+So first of, you need to download the Parse SDK, so go https://parse.com/docs/downloads and download the latest Android SDK. Save the zip file, unzip it and drag the Parse SDL jar into the 'libs' folder of your Android Studio Project. and add the following line to your build.gradle dependencies
 
 {% highlight java %}   
      compile 'com.parse.bolts:bolts-android:1.+'  
@@ -411,7 +412,7 @@ From here you would need your Application ID and the Client Key. Do Not share th
 
 #### Create the keys file
 
-In your `res\values` folder make a file called `keys.xml`. Now add the 2 keys to this file like this : 
+In your `res\values` folder make a file called `keys.xml`. Now add the 2 keys to this file like this :
 
 {% highlight xml %}   
     <string name="ApplicationID">YOUR APPLICATION ID</string>
@@ -424,7 +425,7 @@ Make sure to have your version control system ignore this file so you don't acci
 
 To initialize parse, we first need to create the Application class. So in your java folder add another Class, preferable with the same name as the app for clarity purposes (In this case, ClickZilla). This class will initialize your parse users and decide whether they go to the Login Acitivity or the Main Acitivty.
 
-This is what your class should look like : 
+This is what your class should look like :
 
 {% highlight java %}   
     public class ClickZilla extends Application {
@@ -445,7 +446,7 @@ And now you're all set up with Parse!
 
 Next you want to create the login and sign up activities. So go ahead and create to activities that look like this.
 
-![Login Activity](img/loginActivity.png)
+![Login Activity](img/LoginActivity.png)
 
 ![Sign Up Activity](img/SignupActivity.png)
 
@@ -453,7 +454,7 @@ In these 2 acitivities I used a material design element called Floating Labels w
 
      compile 'com.android.support:design:23.0.0'
 
-Here is an example of how to make one : 
+Here is an example of how to make one :
 
 {% highlight xml %}   
     <android.support.design.widget.TextInputLayout
@@ -552,14 +553,14 @@ and move the Intent filters in the manifest to the LoginActivity to make that th
 
 Ofcourse, now that we have login, we also need a logout button. To do so, we will use the options menu.
 To do so, in your `res\menu\menu_main.xml` replace the settings activity (since we don't have any settings) with :
-    
+
 {% highlight xml %}   
     <item android:id="@+id/action_logout" android:title="Logout"
         android:orderInCategory="100" app:showAsAction="never" />
 {% endhighlight %}   
 
 And then in your MainActivity, in the onOptionsItemSelected, replace the settings item with :
-    
+
 {% highlight java %}   
     if (id == R.id.action_logout) {
         ParseUser.logOut();
@@ -573,52 +574,16 @@ Repeat the same for the DecrementActivity
 ### Storing User specic data
 
 Now that we have all the user stuff setup, we want to store some user specific data on the cloud. Parse is again very useful for this as you can store data in the ParseUser object. In this case, lets say we want to store the number of times the button was pressed. To do so we will modify the buttonClicked method of both the Activities.
-Add the following 2 lines to the buttonClicked of both activities : 
+Add the following 2 lines to the buttonClicked of both activities :
 
 {% highlight java %}   
     ParseUser.getCurrentUser().put("clickCount",clickCounter);
-    ParseUser.getCurrentUser().saveInBackground(); 
+    ParseUser.getCurrentUser().saveInBackground();
 {% endhighlight %}   
 
-This will set the value and store it on the parse cloud. 
+This will set the value and store it on the parse cloud.
 
 ## YOU ARE DONE
 
 Congratulations, you have now completed the Android Springboard Project, and can now extend this to make any app you want :-)
 Feel free to ask any further queries!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
