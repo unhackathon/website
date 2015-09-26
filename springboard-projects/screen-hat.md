@@ -33,7 +33,7 @@ Thread the crimping bead onto the other end of the wire and over the end of the 
 
 Now we get to the actual connections to be made with the LCD. For the finished product we would like to use thread, but that is hard to test on a table since there is nothing stopping the thread from sliding together and shorting the connection. Therefore, we will be using alligator clips for testing, and only sewing into a hat after all the connections are figured out. 
 
-First plug all of your wires into the LCD board. You'll want a red wire to Vin, and a black wire to ground (that's electronics convention), and wires to SCK, TCS, RST, DC, and CCS.  Note that red goes to the Vin and black goes to ground. This is wiring convention, but you don't strictly have to follow it.
+First plug all of your wires into the LCD board. You'll want a red wire to Vin, and a black wire to ground (that's electronics convention), and wires to SCK, SI, TCS, RST, and DC.  Note that red goes to the Vin and black goes to ground. This is wiring convention, but you don't strictly have to follow it.
 
 Next, disconnect your Flora from power and alligator clip the wires on the board to the following plates on your Flora
 
